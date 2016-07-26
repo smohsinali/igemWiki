@@ -1,0 +1,526 @@
+<html>
+
+<style>
+
+/********************************* DEFAULT WIKI SETTINGS  ********************************/
+
+	#topMenu, #top_title {display:none;}
+	#content { padding:0px; width:1000px; margin-top:-7px; margin-left:0px;}
+	body {background-color:white; }
+	#bodyContent h1, #bodyContent h2, #bodyContent h3, #bodyContent h4, #bodyContent h5 { margin-bottom: 0px; }
+
+/********************************* MENU ********************************/
+	/* Wrapper for the menu */
+	.menu_wrapper { 
+		width:150px; 
+		height:100vh; 
+		position:fixed; 
+		padding:0px;
+		float:left; 
+		background-color:#f2f2f2; 
+		text-align:left;
+	}
+
+	/* styling for the menu items */
+	.menu_item {
+		width:100%; 
+		margin:-2px 0px 0px -20px; 
+		padding: 10px 10px;  
+		border-bottom: 1px solid #d3d3d3; 
+		font-weight:bold;
+		color:#000000; 
+		cursor: pointer; 
+	}
+
+	/* when hovering on a menu item */
+	.menu_item:hover { 
+		color:#000000; 
+		background-color: #72c9b6;
+	}
+
+	/* decoration icon for the menu buttons*/
+	.icon {
+		float:right;  
+		font-size:16px; 
+		font-weight:bold; 
+	}
+	
+	/* this is the icon for when the content is collapsed */
+	.plus::before {
+		content: "+"; 
+	}
+	/* this is the icon for when the content is expanded */
+	.less::before {
+		content: "–"; 
+	}	
+
+	/* styling for the ul that creates the buttons */
+	ul.menu_items {
+		width:100%; 
+		margin-left:0px; 
+        margin:0;
+        padding:0;
+		padding:0px;
+		list-style: none; 
+	}
+
+	/* styling for the li that are the menu items */
+	.menu_items li { 
+		width:90%; 
+		margin-top:-2px; 
+		padding: 15px 0px 15px 15px ; 
+		display:block;
+		border-bottom: 1px solid #d3d3d3;  
+		text-align:left; 
+		font-weight:bold;
+		text-decoration:none; 
+		color:#000000; 
+		list-style-type:none; 
+		cursor:pointer; 
+		-webkit-transition: all 0.4s ease; 
+		-moz-transition: all 0.4s ease; 
+		-ms-transition: all 0.4s ease; 
+		-o-transition: all 0.4s ease; transition: all 0.4s ease;  
+	}
+
+	.menu_item a {
+		width: 100%;
+		margin-left: -20px;
+		padding: 11px 90px 12px 20px;
+		text-decoration: none;
+		color:black;		
+	}
+
+	/* When hovering on a menu item */
+	.menu_items li:hover { 
+		background-color:#72c9b6;
+		color: #000000;
+	}
+
+	/* styling for the submenus */
+	.submenu {
+		width:100%; 
+		display: none;  
+		font-weight:bold;
+		cursor:pointer; 
+
+	}
+
+	/* moving the margin for the submenu ul list */
+	ul.submenu { 
+		width: 100%;
+		margin: 10px 0px -11px 0px;
+		list-style: none;
+	}
+
+	/*styling for the submenu buttons */
+	.submenu li { 
+		width: 100%; 
+		margin-left: 10px;
+		margin-bottom: 0px;
+	}
+
+
+	/* hover state for the submenu buttons */
+	.submenu li a {
+		width: 100%; 
+		padding: 5px 10px; 
+		display: inline-block;
+		border-bottom: 1px solid #d3d3d3;
+		background-color:white; 
+		text-decoration:none;
+		color:#000000; 
+	}
+
+
+
+	.submenu li a:hover  {
+		background-color:#000000; 
+		color: #72c9b6;
+	}
+
+
+	/* When the screen is smaller than 680px, the menu has the option to hide/show - this button controls that */
+	.collapsable_menu_control { 
+		width:100%; 
+		padding: 15px 0px;
+		display:none; 
+ 		background-color:#000000; 
+		text-align:center;  
+		font-weight:bold; 
+		color:#72c9b6;
+		cursor:pointer; 
+		-webkit-transition: all 0.4s ease; 
+		-moz-transition: all 0.4s ease; 
+		-ms-transition: all 0.4s ease; 
+		-o-transition: all 0.4s ease; 
+		transition: all 0.4s ease; 
+	}
+
+	/* when hovering on that button */
+	.collapsable_menu_control:hover { 
+		background-color: #72c9b6;
+		color:#000000;  
+	}
+
+/********************************* CONTENT OF THE PAGE ********************************/
+
+	/* Wrapper for the content */
+	.content_wrapper {
+		width: 85%;
+		margin-left:150px;
+		padding:10px 0px; 
+		float:left; 
+		background-color:white; 
+	}
+
+	/*LAYOUT */
+	.column  { 
+		padding: 10px 0px;
+		float:left; 
+		background-color:white; 
+	}
+
+	.full_size {
+		width:100%; 
+	}
+
+	.full_size img { 
+		padding: 10px 15px;
+		width:96.5%; 
+	}
+
+	.half_size {
+		width: 50%; 
+	}
+	.half_size img { 
+		padding: 10px 15px;
+		width: 93%; 
+	}
+
+
+	.clear {
+		clear:both;
+	}
+
+	.highlight { 
+		width: 90%; 
+		margin: auto; 
+		padding: 15px 5px;
+		background-color: #f2f2f2; 
+	}
+
+	.judges-will-not-evaluate {
+		border: 4px solid #72c9b6;
+		display: block;
+		margin: 5px 15px;
+		width: 95%;
+		font-weight:bold;
+	}
+
+
+	/*STYLING */
+
+	/* styling for the titles */
+	.content_wrapper h1, .content_wrapper h2 {
+		padding:5px 15px; 
+		border-bottom:0px; 
+		color:#72c9b6;
+
+	}
+	.content_wrapper h3, .content_wrapper h4, .content_wrapper h5, .content_wrapper h6 { 
+		padding:5px 15px; 
+		border-bottom:0px; 
+		color: #000000;  
+	}
+
+
+	/* font and text */
+	.content_wrapper p { 
+		padding:0px 15px; 
+		font-size: 13px;
+		font-family:Tahoma, Geneva, sans-serif; 
+	}
+
+	/* Links */
+	.content_wrapper a { 
+		font-weight: bold; 
+		text-decoration: underline;
+		text-decoration-color:#72c9b6;
+		color: #72c9b6;
+		-webkit-transition: all 0.4s ease;
+		 -moz-transition: all 0.4s ease; 
+		-ms-transition: all 0.4s ease; 
+		-o-transition: all 0.4s ease; 
+		transition: all 0.4s ease;
+	}
+
+	/* hover for the links */
+	.content_wrapper a:hover { 
+		text-decoration:none;
+		 color:#000000;
+	}
+
+	/* non numbered lists */
+	.content_wrapper ul {
+		padding:0px 20px;
+		font-size: 13px;
+		font-family:Tahoma, Geneva, sans-serif; 
+	}
+
+	/* numbered lists */
+	.content_wrapper ol {
+		padding:0px; 
+		font-size: 13px;
+		font-family:Tahoma, Geneva, sans-serif; 
+	}
+
+	/* Table */
+	.content_wrapper table { 
+		width: 97%; 
+		margin:15px 10px; 
+		border: 1px solid #d3d3d3; 
+		border-collapse: collapse; 
+	}
+
+	/* table cells */
+	.content_wrapper  td { 
+		padding: 10px;
+		vertical-align: text-top; 
+		border: 1px solid #d3d3d3; 
+		border-collapse: collapse; 
+	}
+
+	/* table headers */
+	.content_wrapper th { 
+		padding: 10px; 
+		vertical-align: text-top; 
+		border: 1px solid #d3d3d3; 
+		border-collapse: collapse; 
+		background-color:#f2f2f2; 
+	}
+
+	/* Button class */
+	.button_click { 
+		margin: 10px auto;
+		padding: 15px; width:12%;  
+		text-align:center; 
+		font-weight:bold; 
+		background-color: #72c9b6;
+		cursor:pointer;  
+		-webkit-transition: all 0.4s ease;
+ 		-moz-transition: all 0.4s ease; 
+		-ms-transition: all 0.4s ease; 
+		-o-transition: all 0.4s ease; 
+		transition: all 0.4s ease; 
+	}
+
+	/* button class on hover */
+	.button_click:hover {  
+		background-color:#000000; 
+		color:#72c9b6;
+	}
+
+/********************************* RESPONSIVE STYLING ********************************/
+
+	/* IF THE SCREEN IS LESS THAN 1000PX */
+
+	@media only screen and (max-width: 1000px) {
+
+		#content {width:100%; }
+		.menu_wrapper {width:15%;}
+		.content_wrapper {margin-left: 15%;}
+		.menu_item {display:block;}
+		.icon {display:none;}
+		.highlight {padding:10px 0px;}
+	}
+
+
+	/* IF THE SCREEN IS LESS THAN 680PX */
+
+	@media only screen and (max-width: 680px) {
+		.collapsable_menu_control { display:block;}
+		.menu_item {display:none;}
+		.menu_wrapper { width:100%; height: 15%; position:relative;}
+		.content_wrapper {width:100%; margin-left:0px;}
+		.column.half_size {width:100%; }
+		.column img { width: 100%; padding: 5px 0px;}
+		.icon {display:block;}
+		.highlight {padding:15px 5px;}
+	}
+
+</style>
+
+
+
+
+<!--- THIS IS WHERE THE HTML BEGINS --->
+
+
+<!-- This tells the browser that your page is responsive -->
+
+<head> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head>
+
+
+
+
+<div class="menu_wrapper" >
+
+
+
+
+	<div class="collapsable_menu_control"> MENU ▤ </div>
+
+	<ul id="accordion" class="accordion">
+
+		<li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg">HOME </a> </li>
+
+
+		<li class="menu_item"> <div class="icon plus"></div> TEAM
+			<ul class="submenu">
+				<li> <a href=" http://2016.igem.org/Team:Freiburg/Team"> Team   </a> </li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Collaborations">★  Collaborations </a> </li>
+                    	</ul>
+                </li>
+
+		<li class="menu_item"> <div class="icon plus"></div> PROJECT  
+			<ul class="submenu">
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Description"> ★  Description </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Design"> ★ Design </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Experiments"> Experiments </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Proof"> ★ Proof of Concept </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Demonstrate"> ★ Demonstrate </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Results"> Results </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Notebook"> Notebook </a></li>
+                    	</ul>
+                </li>
+
+		<li class="menu_item"> <div class="icon plus"></div> PARTS  
+			<ul class="submenu">
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Parts">Parts </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Basic_Part"> ★ Basic Parts </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Composite_Part"> ★ Composite Parts </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Part_Collection"> ★ Part Collection </a></li>
+                    	</ul>
+                </li>
+
+
+		<li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg/Safety"> SAFETY </a> </li>
+
+
+		<li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg/Attributions">★  ATTRIBUTIONS </a></li>
+
+
+		<li class="menu_item"> <div class="icon plus"></div> HUMAN PRACTICES 
+			<ul class="submenu">
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Human_Practices"> Human Practices </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/HP/Silver">★ Silver </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/HP/Gold">★ Gold </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Integrated_Practices"> ★ Integrated Practices </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Engagement">★ Engagement </a></li>
+                    	</ul>
+                </li>
+
+
+		<li class="menu_item"> <div class="icon plus"></div> AWARDS 
+			<ul class="submenu">
+				<li><a href="http://2016.igem.org/Team:Freiburg/Entrepreneurship"> ★ Entrepreneurship </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Hardware"> ★ Hardware </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Software">★ Software </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Measurement">★  Measurement </a></li>
+				<li> <a href="http://2016.igem.org/Team:Freiburg/Model">★ Model </a></li>
+
+                    	</ul>
+                </li>
+	</ul>
+
+</div>
+
+
+
+
+
+<div class="content_wrapper">
+
+
+
+<h1 id="team_name">  </h1>
+<h4 id="page_name">  </h4>
+
+
+
+
+
+
+
+
+
+<script>
+
+// This is the jquery part of your template.  Try not modify any of this code since it makes your menu work.
+
+	$(document).ready(function() {
+
+		$("#HQ_page").attr('id','');
+		
+
+		if ( wgPageName.substring( 0,  8) == "Template")  {   // if the page is a template it displays the full name in a single line
+			$("#team_name").html( wgPageName ); 
+		}
+
+		else if (  ( (wgPageName.match(/\//g) || []).length ) == 0 ) {  // if it is the home page , just print the team's name
+			$("#team_name").html( wgPageName.substring( 5, wgPageName.length ) ); 
+		}
+
+		else {
+			 // this adds the team's name as an h1
+			$("#team_name").html( wgPageName.substring( 5 , wgPageName.indexOf("/")  ) ); 
+
+			// this adds the page's title as an h4	
+			$("#page_name").html (     ( wgPageName.substring( wgPageName.indexOf("/") + 1, wgPageName.length ) ).replace( /\/|_/g , " ")  );
+		}
+
+
+
+
+		$('#accordion').find('.menu_item').click(function(){
+
+			 //Expand or collapse this panel
+			submenu = $(this).find('.submenu');
+			submenu.toggle();
+
+			icon = $(this).find('.icon');
+
+			if ( !$( submenu ).is(':visible') ) {
+				icon.removeClass("less").addClass("plus");
+			}
+			else {
+				icon.removeClass("plus").addClass("less");
+			}
+
+			//Hide the other panels
+			$(".submenu").not(submenu).hide();
+			$(".icon").not(icon).removeClass("less").addClass("plus");
+		});
+
+
+		$(".collapsable_menu_control").click(function() {	
+			$(".menu_item").toggle();
+		});
+
+		$( window ).resize(function() {
+			$(".menu_item").show();
+		});
+
+
+	});
+
+
+
+
+</script>
+
+
+</html>

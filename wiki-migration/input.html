@@ -1,0 +1,38 @@
+<html>
+<form method="get" action="wikitranslate.py">
+    <div>
+        <h3>Choose option:</h3>
+        <input type="checkbox" name="rmheaderlink" value="True"> Remove headerlinks
+        <br>
+        <input type="checkbox" name="changepicurl" value="True"> Change the picture links
+        <br>
+        <input type="checkbox" name="appendtextbefore" value="True"> Add preceding text
+        <br>
+        <input type="checkbox" name="appendtextafter" value="True"> Append text
+        <br>
+        <input type="checkbox" name="changeprotocols" value="True"> Change protocol links
+        <br>
+        <input type="checkbox" name="changeregistry" value="True"> Link registry entries
+        <br>
+    </div>
+    <h3>Provide information if necessary</h3>
+    <div>
+        <label for="dwhtml">Name of an internal wiki-page (e.g. <em>labjournal:cellfree</em>):</label>
+        <input id="dwhtml" name="dwsite" required>
+    </div>
+    <div>
+        <label for="textbefore">Text to precede</label>
+        <textarea id='textbefore' cols="20" rows="5" name="textbefore">
+            {{Freiburg/CSS}}
+        </textarea>
+    </div>
+    <div>
+        <label for="textafter">Text to append</label>
+        <textarea id="textafter" cols="20" rows="5" name="textafter"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+</html>
