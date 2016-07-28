@@ -1,0 +1,200 @@
+<html>
+
+<style>
+
+    /********************************* MENU ********************************/
+    /* Wrapper for the menu */
+
+    /* Remove margins and padding from the list, and add a black background color */
+
+    .clearfix:after {
+        display:block;
+        clear:both;
+    }
+
+    /*----- Menu Outline -----*/
+    .menu-wrap {
+        /*width:100%;*/
+        box-shadow:0px 1px 3px rgba(255, 197, 0, 0.2);
+        color: #3e0a11;
+    }
+
+    .menu {
+        /*width:1000px;*/
+
+        margin:0px auto;
+    }
+
+    .menu li {
+        margin:0px;
+        list-style:none;
+    }
+
+    .menu a {
+        transition:all linear 0.15s;
+        color:#919191;
+        background-color: black;
+    }
+
+    .menu li:hover > a, .menu .current-item > a {
+        text-decoration:none;
+        color: #be740d;
+    }
+
+    .menu .arrow {
+        font-size:10px;
+        line-height:0%;
+    }
+
+    /*----- Top Level -----*/
+    .menu > ul > li {
+        float:left;
+        display:inline-block;
+        position:relative;
+        font-size:12px;
+        color: black;
+    }
+
+    .menu > ul > li > a {
+        padding:4px 14px;
+        display:inline-block;
+        text-shadow:0px 1px 0px rgba(0,0,0,0.4);
+    }
+
+    .menu > ul > li:hover > a, .menu > ul > .current-item > a {
+        background:#2e2728;
+    }
+
+    /*----- Bottom Level -----*/
+    .menu li:hover .sub-menu {
+        z-index:1;
+        opacity:1;
+    }
+
+    .sub-menu {
+        width:200%;
+        padding:5px 0px;
+        position:absolute;
+        /*top:100%;*/
+        left:0px;
+        z-index:-1;
+        opacity:0;
+        transition:opacity linear 0.15s;
+        box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+        background:#2e2728;
+    }
+
+    .sub-menu li {
+        display:block;
+        font-size:14px;
+    }
+
+    .sub-menu li a {
+        padding:6px 15px;
+        display:block;
+    }
+
+    .sub-menu li a:hover, .sub-menu .current-item a {
+        background:#3e3436;
+    }
+
+
+
+</style>
+
+
+
+
+<!--- THIS IS WHERE THE HTML BEGINS --->
+
+
+<!-- This tells the browser that your page is responsive -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+
+
+<div class="menu-wrap" >
+    <nav class="menu">
+
+
+        <ul class="clearfix">
+
+            <li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg">HOME </a> </li>
+
+
+            <li class="menu_item">
+                <a href="#"> TEAM <span class="arrow">&#9660;</span></a>
+                <ul class="sub-menu">
+                    <li> <a href=" http://2016.igem.org/Team:Freiburg/Team"> Team   </a> </li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Collaborations">*  Collaborations </a> </li>
+                </ul>
+            </li>
+
+            <li class="menu_item">
+                <a href="#">  PROJECT <span class="arrow">&#9660;</span> </a>
+                <ul class="sub-menu">
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Description"> *  Description </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Design"> * Design </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Experiments"> Experiments </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Proof"> * Proof of Concept </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Demonstrate"> * Demonstrate </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Results"> Results </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Notebook"> Notebook </a></li>
+                </ul>
+            </li>
+
+            <li class="menu_item">
+                <a href="#"> PARTS <span class="arrow">&#9660;</span></a>
+                <ul class="sub-menu">
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Parts">Parts </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Basic_Part"> * Basic Parts </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Composite_Part"> * Composite Parts </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Part_Collection"> * Part Collection </a></li>
+                </ul>
+            </li>
+
+
+            <li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg/Safety"> SAFETY </a> </li>
+
+
+            <li class="menu_item"> <a href="http://2016.igem.org/Team:Freiburg/Attributions">*  ATTRIBUTIONS </a></li>
+
+
+            <li class="menu_item">
+                <a href="#"> HUMAN PRACTICES <span class="arrow">&#9660;</span> </a>
+                <ul class="sub-menu">
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Human_Practices"> Human Practices </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/HP/Silver">* Silver </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/HP/Gold">* Gold </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Integrated_Practices"> * Integrated Practices </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Engagement">* Engagement </a></li>
+                </ul>
+            </li>
+
+
+            <li class="menu_item">
+                <a href="#"> AWARDS <span class="arrow">&#9660;</span> </a>
+                <ul class="sub-menu">
+                    <li><a href="http://2016.igem.org/Team:Freiburg/Entrepreneurship"> * Entrepreneurship </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Hardware"> * Hardware </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Software">* Software </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Measurement">*  Measurement </a></li>
+                    <li> <a href="http://2016.igem.org/Team:Freiburg/Model">* Model </a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+
+    // This is the jquery part of your template.  Try not modify any of this code since it makes your menu work.
+</script>
+
+
+</html>

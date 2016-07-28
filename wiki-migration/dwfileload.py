@@ -5,7 +5,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import cgi
 import urllib3
-
+import sys
 
 ##################
 # DEFINITIONS
@@ -16,10 +16,10 @@ def getdwsource(dwsite):
     # get the subsite of the internal wiki specified as site
     # use the dummy usre to provide access to the wiki
     dokuwiki = requests.get('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody' % dwsite,
-                            auth=HTTPBasicAuth('dummy', 'igem2016'))
+                            auth=HTTPBasicAuth('alis', 'igem2016'))
     # extract the html of the requests-object by using beautifulsoup
     soup = BeautifulSoup(dokuwiki.text, 'html.parser')
-    # print('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody'%site)
+    print('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody'%dwsite)
     return soup
 
 
@@ -39,6 +39,7 @@ def getdwpicnames(source):
             picnamesdic[dwname] = [img.get('src')]
             picnamesdic[dwname].append(img.parent.get('href'))
             print('+ \t %s ' % img.get('src').split('media=')[1])
+            return picnamesdic
             # print('dwlink=%s'%picnamesdic[dwname])
         except:
             print('- \t\t %s ' % img.get('src').split('/')[-1])
@@ -91,7 +92,8 @@ def getpicurl(picname):
 ###################
 if __name__ == "__main__":
     # ask for internal wiki site to read
-    dwsite = input('dwsite (in please in quotations):\t')
+    # dwsite = input('dwsite (in please in quotations):\t')
+    dwsite = sys.argv[1]
     # get sourcecode
     dwsource = getdwsource(dwsite)
     # get all picture names within a href
@@ -105,14 +107,14 @@ if __name__ == "__main__":
 
     # download the images in the current directory (replace non usable syntax and append Freiburg_)
     for url in urldic:
-        r = requests.get('http://wiki.uni-freiburg.de' + urldic[url], auth=HTTPBasicAuth('dummy', 'igem2016'), stream=True)
+        r = requests.get('http://wiki.uni-freiburg.de' + urldic[url], auth=HTTPBasicAuth('alis', 'igem2016'), stream=True)
         if r.status_code == 200:
-            f = open('Freiburg_' + url.replace(':', '-'), 'wb')
+            f = open('images/Freiburg_' + url.replace(':', '-'), 'wb')
             f.write(r.content)
-            f.close()
 
+        f.close()
         f = open('files.txt', 'a')
         for key in urldic.keys():
             f.write('"{}"'.format(key.replace(':', '-')))
             f.write(', ')
-            f.close()
+        f.close()

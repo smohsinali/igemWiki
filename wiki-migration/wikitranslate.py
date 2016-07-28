@@ -63,7 +63,7 @@ for row in reader:
 def getdwsource(dwsite):
     # get the subsite of the internal wiki specified as site
     # use the dummy usre to provide access to the wiki
-    dokuwiki=requests.get('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody'%dwsite, auth=HTTPBasicAuth('dummy', 'igem2016'))
+    dokuwiki=requests.get('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody'%dwsite, auth=HTTPBasicAuth('alis', 'igem2016'))
     # extract the html of the requests-object by using beautifulsoup
     soup=BeautifulSoup(dokuwiki.text, 'html.parser')
     # print('https://wiki.uni-freiburg.de/igem2016/doku.php?id=%s&do=export_xhtmlbody'%site)
@@ -161,74 +161,77 @@ def changeprotocols(soup):
 ##########################
 # BEGIN PROGRAMME
 ##########################
-# if __name__ == "__main__":
-print("hi")
-# set the subprogramcounter
-prog_count = 0
+if __name__ == "__main__":
+    print("hi")
+    # set the subprogramcounter
+    prog_count = 0
 
-# get the source code
-dwsource=getdwsource(dwsite)
+    # get the source code
+    dwsource=getdwsource(dwsite)
 
-# convert it to replaceable text
-exthtml=unicode(dwsource)
+    # convert it to replaceable text
+    exthtml=unicode(dwsource)
 
-# initialize dic to replace elements
-rpdic = {}
+    # initialize dic to replace elements
+    rpdic = {}
 
-# ## is rmheaderlinks ###
-if isrmheaderlinks:
-    # compute dic to replace headerlinks
-    rpdic.update(rmheaderlinks(dwsource))
-    prog_count += 1
+    # ## is rmheaderlinks ###
+    if isrmheaderlinks:
+        # compute dic to replace headerlinks
+        rpdic.update(rmheaderlinks(dwsource))
+        prog_count += 1
 
-# ## is changeprotocols ###
-if ischangeprotocols:
-    rpdic.update(changeprotocols(dwsource))
-    prog_count += 1
+    # ## is changeprotocols ###
+    if ischangeprotocols:
+        rpdic.update(changeprotocols(dwsource))
+        prog_count += 1
 
-# ## is changepicurl ###
-missingimage = False
+    # ## is changepicurl ###
+    missingimage = False
 
-if ischangepicurl:
-    picnamesdic=getdwpicnames(dwsource)
-for key in picnamesdic:
-    serverlink=getpicurl(key)
-if serverlink != None:
-    rpdic.update({cgi.escape(picnamesdic[key][0]):serverlink})
-else:
-    missingimage = True
-if picnamesdic[key][1]:
-    rpdic.update({cgi.escape(picnamesdic[key][1]):serverlink})
-    prog_count+=1
+    if ischangepicurl:
+        picnamesdic=getdwpicnames(dwsource)
 
-# ## is registry ###
-if isregistry:
-    rpdic.update(registrydic)
-    prog_count+=1
+    for key in picnamesdic:
+        serverlink=getpicurl(key)
 
-# ## cancel output if no program was called ###
-if prog_count == 0:
-    sys.exit(0)
+    if serverlink != None:
+        rpdic.update({cgi.escape(picnamesdic[key][0]):serverlink})
+    else:
+        missingimage = True
 
-# ## replacing ###
-exthtmlold = exthtml
-for text in rpdic.keys():
-    # exthtml = exthtml.replace(cgi.escape(text),unescape(rpdic[text]))
-    exthtml = exthtml.replace(text,rpdic[text])
+    if picnamesdic[key][1]:
+        rpdic.update({cgi.escape(picnamesdic[key][1]):serverlink})
+        prog_count+=1
 
-sys.stdout=old_stdout
+    # ## is registry ###
+    if isregistry:
+        rpdic.update(registrydic)
+        prog_count+=1
 
-if not missingimage:
+    # ## cancel output if no program was called ###
+    if prog_count == 0:
+        sys.exit(0)
 
-    print "Content-Disposition: attachment; filename=\"%s.html\"\r\n\n"%dwsite
+    # ## replacing ###
+    exthtmlold = exthtml
+    for text in rpdic.keys():
+        # exthtml = exthtml.replace(cgi.escape(text),unescape(rpdic[text]))
+        exthtml = exthtml.replace(text,rpdic[text])
 
-if appendtextbefore:
-    print(textbefore.encode('utf8'))
-    print(exthtml.encode('utf8'))
-if appendtextafter:
-    print(textafter.encode('utf8'))
-else:
-    print "Content-type: text/html \n"
+    sys.stdout=old_stdout
 
-    print('There is an image missing!!')
-    # info
+    if not missingimage:
+
+        print "Content-Disposition: attachment; filename=\"%s.html\"\r\n\n"%dwsite
+
+    if appendtextbefore:
+        print(textbefore.encode('utf8'))
+        print(exthtml.encode('utf8'))
+    if appendtextafter:
+        print(textafter.encode('utf8'))
+    else:
+        print "Content-type: text/html \n"
+
+        print('There is an image missing!!')
+        # info
